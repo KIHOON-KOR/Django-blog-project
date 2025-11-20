@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>블로그 프로젝트</title>
 </head>
 <body>
-    <nav>
+    <nav style="display: flex; justify-content: space-between">
+        <div>
+            <a href="{% url "blog_list" %}">홈</a>
+        </div>
         <div style="text-align: right">
             {% if request.user.is_authenticated %}
                 <form action="{%  url 'logout' %}" method="POST" style="display: inline">
@@ -19,14 +22,6 @@
             {% endif %}
         </div>
     </nav>
-    <h1>블로그 목록</h1>
-
-    {% for blog in blogs %}
-        <p>
-            <a href="{% url 'blog_detail' blog.pk %}">
-                {{ blog.title }} - <small>{{ blog.created_at | date:"Y-m-d"}}</small>
-            </a>
-        </p>
-    {% endfor %}
+    {%  block content %}{% endblock %}
 </body>
 </html>
